@@ -18,7 +18,6 @@ BallerDancer.prototype.step = function () {
   this.randomMovement();
   if (this.money < 10 && this.isAtTheClub) {
     this.isAtTheClub = false;
-    window.dancers.splice(this._id, 1);
     this.leaveTheClub();
     //TODO: fix array (fill in gaps)
   }

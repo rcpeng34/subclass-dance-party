@@ -33,6 +33,12 @@ Dancer.prototype.setPosition = function(position) {
 
 Dancer.prototype.leaveTheClub = function() {
   this.$node.remove();
+  window.dancers.splice(this._id, 1, null);
+  for(var i = 0; i < window.dancers.length; i++) {
+    if(window.dancers[i]){
+      window.dancers[i]._id = i;
+    }
+  }
 };
 
 /*// Creates and returns a new dancer object that can step

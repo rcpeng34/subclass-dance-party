@@ -30,7 +30,6 @@ DiggerDancer.prototype.step = function () {
 
   if (this.money < 10 && this.isAtTheClub) {
     this.isAtTheClub = false;
-    window.dancers.splice(this._id, 1);
     this.leaveTheClub();
     //TODO: fix array (fill in gaps)
   }
@@ -51,16 +50,18 @@ DiggerDancer.prototype.findBaller = function () {
   var closestBallerDistance = null;
 
   for(var i = 0; i < window.dancers.length; i++) {
-    if(window.dancers[i].constructor === BallerDancer) {
-      if (!closestBaller) {
-        closestBaller = window.dancers[i];
-        closestBallerDistance = findDistance(closestBaller._position, this._position);
-      } else { //closestBaller is not undefined, so see if distance is closer
-        currentBaller = window.dancers[i];
-        currentDistance = findDistance(currentBaller._position, this._position);
-        if(currentDistance <= closestBallerDistance) {
-          closestBaller = currentBaller;
-          closestBallerDistance = currentDistance;
+    if(window.dancers[i]) {
+      if(window.dancers[i].constructor === BallerDancer) {
+        if (!closestBaller) {
+          closestBaller = window.dancers[i];
+          closestBallerDistance = findDistance(closestBaller._position, this._position);
+        } else { //closestBaller is not undefined, so see if distance is closer
+          currentBaller = window.dancers[i];
+          currentDistance = findDistance(currentBaller._position, this._position);
+          if(currentDistance <= closestBallerDistance) {
+            closestBaller = currentBaller;
+            closestBallerDistance = currentDistance;
+          }
         }
       }
     }
