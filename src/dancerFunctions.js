@@ -2,13 +2,20 @@ $(document).ready(function(){
 
   var dancer;
 
-  $('body').append('<div id="info" class="popbox"></div>')
+  $('body').append('<div id="info" class="popbox"></div>');
 
   $('.dancefloor')
-  .on('mouseenter', '.dancer', function(){
+  .on('mouseover', '.dancer', function(){
     dancer = window.dancers[this.id];
-    console.log(this.id, this)
-    $('.popbox').text("money in wallet: $" + dancer.money);
+    console.log(this.id, this.name, this)
+    $('.popbox').html(
+      '<p>name: ' + dancer.name + '</p>' +
+      '<p>money in wallet: $' + dancer.money + '</p>'
+      );
+    $('.popbox').css({
+      top: dancer._position[0] + 50,
+      left: dancer._position[1] + 50
+    });
     $('.popbox').show();
   });
 

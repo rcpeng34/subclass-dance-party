@@ -3,6 +3,7 @@ var Dancer = function(top, left, timeBetweenSteps, dancerIndex) {
     dancerIndex + '>');
 
   this._id = dancerIndex;
+  this.name = window.names[Math.floor(Math.random()*28)];
   this._timeBetweenSteps = timeBetweenSteps;
   this._position = [top, left];
   this.step();
