@@ -20,6 +20,8 @@ $(document).ready(function(){
   $('.dancefloor')
   .on('click', '.dancer', function(){
     dancer.money -= 10;
+    window.clubRevenue += 10;
+    $('.ClubRevenue').html(window.clubRevenue);
   });
 
   //findDistance takes arrays

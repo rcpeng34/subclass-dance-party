@@ -1,5 +1,6 @@
 $(document).ready(function(){
   window.dancers = [];
+  window.clubRevenue = 0;
 
   $(".DancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
