@@ -1,7 +1,5 @@
-var c = function(v){console.log(v)}
-
-var Dancer = function(top, left, timeBetweenSteps) {
-  this.$node = $('<span class="dancer"></span>');
+var Dancer = function(top, left, timeBetweenSteps, dancerIndex) {
+  this.$node = $('<span class="dancer" id=' + dancerIndex + '"></span>');
   this._timeBetweenSteps = timeBetweenSteps;
   this.step();
   this.setPosition(top, left);
