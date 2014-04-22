@@ -31,5 +31,12 @@ body, a:link, a:visited, a:active{
 }
 
 .popbox {
+    background: #555;
+    border: 1px solid #4D4F53;
+    border-radius: 10px;
+    color: #000000;
     display: none;
+    height: 200px;
+    width: 200px;
+    margin: 0px;
 }
