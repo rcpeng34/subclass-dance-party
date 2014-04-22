@@ -25,7 +25,8 @@ $(document).ready(function(){
     var dancer = new dancerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.random() * 1000
+      Math.random() * 1000,
+      window.dancers.length
     );
     $('.dancefloor').append(dancer.$node);
     window.dancers.push(dancer);

@@ -4,7 +4,7 @@ body, html{
 body{
   margin: 0px;
   background-color:#444;
-  background-image:url(http://www.thehotelelevate.com/wp-content/uploads/background/24.jpg);
+  /*background-image:url(http://www.thehotelelevate.com/wp-content/uploads/background/24.jpg);*/
   background-repeat:no-repeat;
   background-size:100% 100%;
   background-position:center;
@@ -25,9 +25,8 @@ body, a:link, a:visited, a:active{
   background-color: #777;
 }
 .dancer{
-  border:10px solid red;
-  border-radius:10000000px;
   position:absolute;
+  background: 0;
 }
 
 .popbox {
