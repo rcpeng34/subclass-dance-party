@@ -7,7 +7,6 @@ var BallerDancer = function(top, left, timeBetweenSteps, dancerIndex) {
     width: '50px',
     height: '100px'
   });
-  this.isAtTheClub = true;
 };
 
 BallerDancer.prototype = Object.create(Dancer.prototype);
@@ -21,6 +20,6 @@ BallerDancer.prototype.step = function () {
     this.isAtTheClub = false;
     window.dancers.splice(this._id, 1);
     this.leaveTheClub();
-
+    //TODO: fix array (fill in gaps)
   }
 };

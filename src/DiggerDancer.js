@@ -13,6 +13,7 @@ DiggerDancer.prototype.constructor = DiggerDancer;
 DiggerDancer.prototype.step = function () {
   // this.oldstep();
   Dancer.prototype.step.apply(this);
+
   // if Digger hasn't found a Baller in a while, find Baller
   var foundBaller = this.findBaller()[0];
   var foundDist = this.findBaller()[1];
@@ -25,6 +26,14 @@ DiggerDancer.prototype.step = function () {
   }
   // else random motion
   this.setPosition(this._position);
+
+
+  if (this.money < 10 && this.isAtTheClub) {
+    this.isAtTheClub = false;
+    window.dancers.splice(this._id, 1);
+    this.leaveTheClub();
+    //TODO: fix array (fill in gaps)
+  }
 };
 
 var findDistance = function (pos1, pos2) {

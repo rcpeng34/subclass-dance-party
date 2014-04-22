@@ -8,6 +8,7 @@ var Dancer = function(top, left, timeBetweenSteps, dancerIndex) {
   this.step();
   this.setPosition(this._position);
   this.money = Math.floor(Math.random()*200);
+  this.isAtTheClub = true;
 };
 
 Dancer.prototype.step = function() {

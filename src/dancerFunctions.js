@@ -24,6 +24,17 @@ $(document).ready(function(){
     $('.ClubRevenue').html(window.clubRevenue);
   });
 
+  $('.LineUpButton').on('click', function(event){
+    for(var i = 0; i < window.dancers.length; i++) {
+      window.dancers[i].setPosition([
+        $('body').height()*0.6, $('.dancefloor').width()*0.9 - 100*i
+      ]);
+      window.dancers[i].money -=10;
+      window.clubRevenue += 10;
+      $('.ClubRevenue').html(window.clubRevenue);
+    }
+  });
+
   //findDistance takes arrays
   // var findDistance = function (pos1, pos2) {
   //   var y = pos1[0] - pos2[0];
