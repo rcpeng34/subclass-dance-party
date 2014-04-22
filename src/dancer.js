@@ -1,8 +1,9 @@
 var Dancer = function(top, left, timeBetweenSteps, dancerIndex) {
-  this.$node = $('<span class="dancer" id=' + dancerIndex + '"></span>');
+  this.$node = $('<span class="dancer" id=' + dancerIndex + '></span>');
   this._timeBetweenSteps = timeBetweenSteps;
   this.step();
   this.setPosition(top, left);
+  this.money = Math.floor(Math.random()*200);
 };
 
 Dancer.prototype.step = function() {
