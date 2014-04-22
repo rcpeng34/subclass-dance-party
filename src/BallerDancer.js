@@ -9,6 +9,7 @@ var BallerDancer = function(top, left, timeBetweenSteps, dancerIndex) {
 
 BallerDancer.prototype = Object.create(Dancer.prototype);
 // BallerDancer.prototype.oldstep = Dancer.prototype.step;
+BallerDancer.prototype.constructor = BallerDancer;
 BallerDancer.prototype.step = function () {
   // this.oldstep();
   Dancer.prototype.step.apply(this);
