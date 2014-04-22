@@ -2,7 +2,11 @@ $(document).ready(function(){
 
   var dancer;
 
+  // popbox is the popup that has dancer info in it
   $('body').append('<div id="info" class="popbox"></div>');
+
+  //announcement will make announcements in the center of the screen
+  $('body').append('<div id="announcement" class="announcement"></div>')
 
   $('.dancefloor')
   .on('mouseover', '.dancer', function(){

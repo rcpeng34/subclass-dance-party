@@ -34,6 +34,8 @@ Dancer.prototype.setPosition = function(position) {
 
 Dancer.prototype.leaveTheClub = function() {
   this.$node.remove();
+  $('.announcement').html('<h1>' + this.name + ' has left the club!</h1>');
+  $('.announcement').fadeIn(500).delay(3000).fadeOut("slow");
   window.dancers.splice(this._id, 1, null);
   for(var i = 0; i < window.dancers.length; i++) {
     if(window.dancers[i]){
