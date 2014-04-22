@@ -16,12 +16,12 @@ $(document).ready(function(){
       top: dancer._position[0] + 50,
       left: dancer._position[1] + 50
     });
-    $('.popbox').show();
+    $('.popbox').fadeIn('fast');
   });
 
   $('.dancefloor')
   .on('mouseleave', '.dancer', function(){
-    $('.popbox').hide();
+    $('.popbox').fadeOut('slow');
   });
 
   $('.dancefloor')
