@@ -2,6 +2,7 @@ var Dancer = function(top, left, timeBetweenSteps, dancerIndex) {
   this.$node = $('<img class="dancer" id=' +
     dancerIndex + '>');
 
+  this._id = dancerIndex;
   this._timeBetweenSteps = timeBetweenSteps;
   this._position = [top, left];
   this.step();
@@ -14,6 +15,12 @@ Dancer.prototype.step = function() {
   setTimeout(boundStep, this._timeBetweenSteps);
 };
 
+Dancer.prototype.randomMovement = function ()  {
+  this._position[0] += (Math.random()*40)-20;
+  this._position[1] += (Math.random()*40)-20;
+  this.setPosition(this._position);
+};
+
 Dancer.prototype.setPosition = function(position) {
   this._position = position;
   var styleSettings = {
@@ -21,6 +28,10 @@ Dancer.prototype.setPosition = function(position) {
     left: position[1]
   };
   this.$node.css(styleSettings);
+};
+
+Dancer.prototype.leaveTheClub = function() {
+  this.$node.remove();
 };
 
 /*// Creates and returns a new dancer object that can step
