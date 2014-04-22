@@ -1,13 +1,15 @@
 $(document).ready(function(){
 
+  var dancer;
+
   $('body').append('<div id="info" class="popbox"></div>')
 
   $('.dancefloor')
   .on('mouseenter', '.dancer', function(){
-    console.log($('.dancer'));
-    console.log(this);
-
-    $('.popbox').text('test');
+    dancer = window.dancers[this.id];
+    $('.popbox').text("money in wallet: $" + dancer.money);
+    dancer.money = Math.max(0, dancer.money-10);
+    // $('.popbox').css({position})
     $('.popbox').show();
   });
 
