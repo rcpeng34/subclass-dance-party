@@ -14,7 +14,7 @@ DiggerDancer.prototype.step = function () {
   // this.oldstep();
   Dancer.prototype.step.apply(this);
   this.findBaller();
-  console.log(this._position);
+  // console.log(this._position);
   this.setPosition(this._position);
 };
 
@@ -46,8 +46,8 @@ DiggerDancer.prototype.findBaller = function () {
       }
     }
   }
-  this._position[0] = (closestDistance/20)*closestBaller._position[0]-this._position[0];
-  this._position[1] = (closestDistance/20)*closestBaller._position[1]-this._position[1];
+  this._position[0] += (10/closestDistance)*(closestBaller._position[0]-this._position[0]);
+  this._position[1] += (10/closestDistance)*(closestBaller._position[1]-this._position[1]);
 };
 
 
