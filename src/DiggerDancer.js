@@ -13,41 +13,59 @@ DiggerDancer.prototype.constructor = DiggerDancer;
 DiggerDancer.prototype.step = function () {
   // this.oldstep();
   Dancer.prototype.step.apply(this);
-  this.findBaller();
-  // console.log(this._position);
+  // if Digger hasn't found a Baller in a while, find Baller
+  var foundBaller = this.findBaller()[0];
+  var foundDist = this.findBaller()[1];
+  if(!foundBaller) {
+    this.randomMovement();
+  } else {
+    this._position[0] += (10/foundDist)*(foundBaller._position[0]-this._position[0]);
+    this._position[1] += (10/foundDist)*(foundBaller._position[1]-this._position[1]);
+    this.dig(foundBaller, foundDist);
+  }
+  // else random motion
   this.setPosition(this._position);
 };
 
 var findDistance = function (pos1, pos2) {
   var y = pos1[0] - pos2[0];
   var x = pos1[1] - pos2[1];
-  return Math.sqrt(y*y + x*x);
+  return Math.sqrt(y * y + x * x);
 };
+
 // findBaller finds the nearest baller dancer
-// sets position to be closer every step
+// returns an array of form [closest baller, distance]
 DiggerDancer.prototype.findBaller = function () {
-  var closestBaller;
-  var closestDistance;
-  var currentBaller;
-  var currentDistance;
+  var currentBaller = null;
+  var currentDistance = null;
+  var closestBaller = null;
+  var closestBallerDistance = null;
 
   for(var i = 0; i < window.dancers.length; i++) {
     if(window.dancers[i].constructor === BallerDancer) {
       if (!closestBaller) {
         closestBaller = window.dancers[i];
-        closestDistance = findDistance(closestBaller._position, this._position);
+        closestBallerDistance = findDistance(closestBaller._position, this._position);
       } else { //closestBaller is not undefined, so see if distance is closer
         currentBaller = window.dancers[i];
         currentDistance = findDistance(currentBaller._position, this._position);
-        if(currentDistance < closestDistance) {
+        if(currentDistance <= closestBallerDistance) {
           closestBaller = currentBaller;
-          closestDistance = currentDistance;
+          closestBallerDistance = currentDistance;
         }
       }
     }
   }
-  this._position[0] += (10/closestDistance)*(closestBaller._position[0]-this._position[0]);
-  this._position[1] += (10/closestDistance)*(closestBaller._position[1]-this._position[1]);
+  return ([closestBaller, closestBallerDistance]);
+};
+
+DiggerDancer.prototype.dig = function(baller, distance) {
+  if(distance <= 10) {
+    baller.money -= 10;
+    this.money += 10;
+    // return true;
+  }
+  // return false;
 };
 
 
