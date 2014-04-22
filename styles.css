@@ -29,3 +29,7 @@ body, a:link, a:visited, a:active{
   border-radius:10000000px;
   position:absolute;
 }
+
+.popbox {
+    display: none;
+}
