@@ -5,8 +5,7 @@ $(document).ready(function(){
   // popbox is the popup that has dancer info in it
   $('body').append('<div id="info" class="popbox"></div>');
 
-  //announcement will make announceme
-  //nts in the center of the screen
+  //announcement will make announcements in the center of the screen
   $('.dancefloor').append('<span id="announcement" class="announcement"></span>')
 
   $('.dancefloor')
@@ -47,12 +46,5 @@ $(document).ready(function(){
       }
     }
   });
-
-  //findDistance takes arrays
-  // var findDistance = function (pos1, pos2) {
-  //   var y = pos1[0] - pos2[0];
-  //   var x = pos1[1] - pos2[1];
-  //   return Math.sqrt(y*y + x*x);
-  // };
 
 });

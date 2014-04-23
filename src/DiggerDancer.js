@@ -1,5 +1,8 @@
+// DiggerDancers gravitate towards Ballers, unless there are
+// none present, in which case they move randomly
 var DiggerDancer = function(top, left, timeBetweenSteps, dancerIndex) {
   Dancer.apply(this, Array.prototype.slice.call(arguments));
+
   this.$node.attr({
     src: 'http://cdn.freebievectors.com/illustrations/10/m/miner-mine-job-profession/preview.jpg',
     width: '50px',
@@ -7,38 +10,50 @@ var DiggerDancer = function(top, left, timeBetweenSteps, dancerIndex) {
   });
 };
 
+// "inheriting" Dancer
 DiggerDancer.prototype = Object.create(Dancer.prototype);
 DiggerDancer.prototype.constructor = DiggerDancer;
-// DiggerDancer.prototype.oldstep = Dancer.prototype.step;
+
 DiggerDancer.prototype.step = function () {
-  // this.oldstep();
   Dancer.prototype.step.apply(this);
 
-  // if Digger hasn't found a Baller in a while, find Baller
+  var cs = window.chaseSpeed;
+
+  // find a baller
   var foundBaller = this.findBaller()[0];
   var foundDist = this.findBaller()[1];
+
+  // if Digger can't find a baller, move randomly
   if(!foundBaller) {
     this.randomMovement();
-  } else {
-    this._position[0] += (10/foundDist)*(foundBaller._position[0]-this._position[0]);
-    this._position[1] += (10/foundDist)*(foundBaller._position[1]-this._position[1]);
-    this.dig(foundBaller, foundDist);
   }
-  // else random motion
-  this.setPosition(this._position);
 
+  // once Digger finds a baller, move towards baller
+  else {
+    this.chaseBaller(window.chaseSpeed, foundBaller, foundDist);
+  }
 
+  // leave if money falls below $10
   if (this.money < 10 && this.isAtTheClub) {
-    this.isAtTheClub = false;
     this.leaveTheClub();
-    //TODO: fix array (fill in gaps)
   }
 };
 
-var findDistance = function (pos1, pos2) {
-  var y = pos1[0] - pos2[0];
-  var x = pos1[1] - pos2[1];
-  return Math.sqrt(y * y + x * x);
+// chaseballer is a movement pattern where the digger chases the baller it found via findBaller
+// see line 33 to see where it is invoked
+DiggerDancer.prototype.chaseBaller = function(cs, fb, fd) {
+  this._position[0] += (cs/fd)*(fb._position[0]-this._position[0]);
+  this._position[1] += (cs/fd)*(fb._position[1]-this._position[1]);
+  this.setPosition(this._position);
+  this.dig(fb, fd); // check if close enough to dig
+};
+
+// if digger gets within 10 px of a baller, digger takes $10 from baller
+DiggerDancer.prototype.dig = function(baller, distance) {
+  if(distance <= 10) {
+    baller.money -= 10;
+    this.money += 10;
+  }
 };
 
 // findBaller finds the nearest baller dancer
@@ -48,6 +63,13 @@ DiggerDancer.prototype.findBaller = function () {
   var currentDistance = null;
   var closestBaller = null;
   var closestBallerDistance = null;
+
+  // helper function for calculating distance
+  var findDistance = function (pos1, pos2) {
+    var y = pos1[0] - pos2[0];
+    var x = pos1[1] - pos2[1];
+    return Math.sqrt(y * y + x * x);
+  };
 
   for(var i = 0; i < window.dancers.length; i++) {
     if(window.dancers[i]) {
@@ -69,14 +91,6 @@ DiggerDancer.prototype.findBaller = function () {
   return ([closestBaller, closestBallerDistance]);
 };
 
-DiggerDancer.prototype.dig = function(baller, distance) {
-  if(distance <= 10) {
-    baller.money -= 10;
-    this.money += 10;
-    // return true;
-  }
-  // return false;
-};
 
 
 

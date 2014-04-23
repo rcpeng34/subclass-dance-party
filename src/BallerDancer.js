@@ -1,5 +1,7 @@
+// BallerDancers move randomly, start with more money than normal dancers
 var BallerDancer = function(top, left, timeBetweenSteps, dancerIndex) {
   Dancer.apply(this, Array.prototype.slice.call(arguments));
+
   // ballers start with at least $400
   this.money = Math.max((Math.floor(Math.random()*1000)), 400);
   this.$node.attr({
@@ -9,16 +11,20 @@ var BallerDancer = function(top, left, timeBetweenSteps, dancerIndex) {
   });
 };
 
+// "inheriting Dancer"
 BallerDancer.prototype = Object.create(Dancer.prototype);
-// BallerDancer.prototype.oldstep = Dancer.prototype.step;
 BallerDancer.prototype.constructor = BallerDancer;
+
 BallerDancer.prototype.step = function () {
-  // this.oldstep();
   Dancer.prototype.step.apply(this);
+
+  // ballers move randomly
   this.randomMovement();
+
+  // if baller falls betwen $10, he leaves the club
   if (this.money < 10 && this.isAtTheClub) {
-    this.isAtTheClub = false;
+    $('.announcement').html('<h1>' + this.name + ' has left the club!</h1>');
+    $('.announcement').fadeIn().delay(1500).fadeOut();
     this.leaveTheClub();
-    //TODO: fix array (fill in gaps)
   }
 };

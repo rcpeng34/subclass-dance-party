@@ -1,40 +1,46 @@
 var Dancer = function(top, left, timeBetweenSteps, dancerIndex) {
+
+  // jquery node to build the final representation
   this.$node = $('<img class="dancer" id=' +
     dancerIndex + '>');
 
+  // private variables
   this._id = dancerIndex;
-  this.name = window.names[Math.floor(Math.random()*28)];
-  this._timeBetweenSteps = timeBetweenSteps;
   this._position = [top, left];
-  this.step();
-  this.setPosition(this._position);
-  this.money = Math.floor(Math.random()*200);
+  this._timeBetweenSteps = timeBetweenSteps;
+
+  // other variables
+  this.name = window.names[Math.floor(Math.random()*window.names.length)]; // TO-DO: make names not global
+  this.money = Math.max(Math.floor(Math.random()*200), 20)
+  // truly removing objects was difficult, so we can make them "leave" by flipping the isAtTheClub boolean
   this.isAtTheClub = true;
+
+  // things called at object creation
+  this.setPosition(this._position);
+  this.step();
 };
 
-Dancer.prototype.step = function() {
-  var self = this;
-  setTimeout(function() {
-    self.step();
-  }, this._timeBetweenSteps);
+// invoking this on a dancer makes them leave the club, announcing their exit
+Dancer.prototype.leaveTheClub = function() {
+  this.$node.remove();
+  this.isAtTheClub = false;
+  window.dancers[this._id] = null;
 };
 
+// call dancer.randomMovement to make dancer move randomly
 Dancer.prototype.randomMovement = function ()  {
-  var dY = Math.random()*40-20;
-  var dX = Math.random()*40-20;
-  // while(this._position[0] + dY > window.danceFloorHeight - 100 ||
-  //       this._position[0] + dY < 0 ||
-  //       this._position[1] + dX > window.danceFloorWidth - 50 ||
-  //       this._position[1] + dX < 0) {
-  //   dY = Math.random()*40-20;
-  //   dX = Math.random()*40-20;
-  // }
-  dY = Math.min(50, dY);
+  var ms = window.movementSpeed;
+
+  var dY = (Math.random()*(2*ms)) - ms;
+  var dX = (Math.random()*(2*ms)) - ms;
+
+// TO-DO clean this up
   this._position[0] = Math.min((Math.max(50, this._position[0]+ dY)), window.danceFloorHeight - 100);
   this._position[1] = Math.min((Math.max(0, this._position[1] + dX)), window.danceFloorWidth - 50);
   this.setPosition(this._position);
 };
 
+// setPosition takes an array position, and sets the dancer's top and left attributes (style)
 Dancer.prototype.setPosition = function(position) {
   this._position = position;
   var styleSettings = {
@@ -44,49 +50,10 @@ Dancer.prototype.setPosition = function(position) {
   this.$node.css(styleSettings);
 };
 
-Dancer.prototype.leaveTheClub = function() {
-  this.$node.remove();
-  $('.announcement').html('<h1>' + this.name + ' has left the club!</h1>');
-  $('.announcement').fadeIn(500).delay(3000).fadeOut("slow");
-  window.dancers.splice(this._id, 1, null);
-  for(var i = 0; i < window.dancers.length; i++) {
-    if(window.dancers[i]){
-      window.dancers[i]._id = i;
-    }
-  }
+// this function calls itself every _timeBetweenSteps ms
+Dancer.prototype.step = function() {
+  var self = this;
+  setTimeout(function() {
+    self.step();
+  }, this._timeBetweenSteps);
 };
-
-/*// Creates and returns a new dancer object that can step
-var makeDancer = function(top, left, timeBetweenSteps){
-
-  var dancer = {};
-
-  // use jQuery to create an HTML <span> tag
-  dancer.$node = $('<span class="dancer"></span>');
-
-
-  dancer.step = function(){
-    // the basic dancer doesn't do anything interesting at all on each step,
-    // it just schedules the next step
-    setTimeout(dancer.step, timeBetweenSteps);
-  };
-  dancer.step();
-
-  dancer.setPosition = function(top, left){
-    // Use css top and left properties to position our <span> tag
-    // where it belongs on the page. See http://api.jquery.com/css/
-    //
-    var styleSettings = {
-      top: top,
-      left: left
-    };
-    dancer.$node.css(styleSettings);
-  };
-
-  // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
-  // this one sets the position to some random default point within the body
-  dancer.setPosition(top, left);
-
-  return dancer;
-};
-*/

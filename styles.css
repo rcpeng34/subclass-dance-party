@@ -1,22 +1,29 @@
 body, html{
   height:100%;
 }
+
 body{
-  margin: 0px;
+  margin:0px;
   background-color:#444;
   font-size: 18px;
 }
 
 body, a:link, a:visited, a:active{
-  color: lightblue;
-}
-.title, .DancerButton{
-  padding:5px 12px;
-  float:right;
+  color:lightblue;
 }
 
 div {
   height: 100%;
+}
+
+.announcement{
+  font-size: 36px;
+  text-align:center;
+  z-index:1000;
+}
+
+.clubRevenue{
+  padding:5px 12px;
 }
 
 .dancefloor{
@@ -32,48 +39,44 @@ div {
   z-index:1;
 }
 
+.dancer{
+  position:absolute;
+  background: 0;
+}
+
+.DancerButton, .LineUpButton, .pull-left, .title{
+  padding:5px 12px;
+}
+
+.DancerButton, .title{
+  float:right;
+}
+
+.LineUpButton, .pull-left{
+  float:left;
+}
+
+.popbox {
+  position:absolute;
+  background: #555;
+  color: #000000;
+  display: none;
+  height: 200px;
+  width: 200px;
+}
+
 .sidebar{
-  /*height:100%;*/
-  /*max-height:100%;*/
   overflow: auto;
   width:20%;
   float:left;
 }
 
-.announcement{
-  font-size: 36px;
-  text-align:center;
-  z-index:1000;
-}
-
-.pull-left, .LineUpButton{
-  padding:5px 12px;
-  float:left;
-}
-
-.clubRevenue{
-  padding:5px 12px;
+.title{
+  background-color: #777;
 }
 
 .topbar{
   height:32px;
   background-color: #555;
 }
-.title{
-  background-color: #777;
-}
-.dancer{
-  position:absolute;
-  background: 0;
-}
 
-.popbox {
-    position:absolute;
-    background: #555;
-    /*border: 1px solid #4D4F53;*/
-    /*border-radius: 10px;*/
-    color: #000000;
-    display: none;
-    height: 200px;
-    width: 200px;
-}
