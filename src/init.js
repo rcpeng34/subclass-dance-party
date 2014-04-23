@@ -1,6 +1,8 @@
 $(document).ready(function(){
   window.dancers = [];
   window.clubRevenue = 0;
+  // window.danceFloorHeight = $(".dancefloor").height();
+  // window.danceFloorWidth = $(".dancefloor").width();
 
   $(".DancerButton").on("click", function(event){
     /* This function sets up the click handlers for the create-dancer
@@ -23,9 +25,10 @@ $(document).ready(function(){
 
     // make a dancer with a random position
 
+
     var dancer = new dancerFunction(
-      $('body').height() * Math.random(),
-      $('body').width() * Math.random(),
+      ($(".dancefloor").height()) * Math.random() + 40, //top bar ~40px
+      ($(".dancefloor").width()) * Math.random(),
       Math.random() * 1000,
       window.dancers.length
     );

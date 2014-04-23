@@ -5,13 +5,13 @@ $(document).ready(function(){
   // popbox is the popup that has dancer info in it
   $('body').append('<div id="info" class="popbox"></div>');
 
-  //announcement will make announcements in the center of the screen
-  $('body').append('<div id="announcement" class="announcement"></div>')
+  //announcement will make announceme
+  //nts in the center of the screen
+  $('.dancefloor').append('<span id="announcement" class="announcement"></span>')
 
   $('.dancefloor')
   .on('mouseover', '.dancer', function(){
     dancer = window.dancers[this.id];
-    console.log(this.id, this.name, this)
     $('.popbox').html(
       '<p>name: ' + dancer.name + '</p>' +
       '<p>money in wallet: $' + dancer.money + '</p>'

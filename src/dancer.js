@@ -13,13 +13,24 @@ var Dancer = function(top, left, timeBetweenSteps, dancerIndex) {
 };
 
 Dancer.prototype.step = function() {
-  var boundStep = this.step.bind(this);
-  setTimeout(boundStep, this._timeBetweenSteps);
+  var self = this;
+  setTimeout(function() {
+    self.step();
+  }, this._timeBetweenSteps);
 };
 
 Dancer.prototype.randomMovement = function ()  {
-  this._position[0] += (Math.random()*40)-20;
-  this._position[1] += (Math.random()*40)-20;
+  var dY = Math.random()*40-20;
+  var dX = Math.random()*40-20;
+  while(this._position[0] + dY > $(".dancefloor").height() - 100 ||
+        this._position[0] + dY < 0 ||
+        this._position[1] + dX > $(".dancefloor").width() - 50 ||
+        this._position[1] + dX < 0) {
+    dY = Math.random()*40-20;
+    dX = Math.random()*40-20;
+  }
+  this._position[0] += dY;
+  this._position[1] += dX;
   this.setPosition(this._position);
 };
 
