@@ -1,23 +1,10 @@
 $(document).ready(function(){
   window.dancers = [];
   window.clubRevenue = 0;
-  // window.danceFloorHeight = $(".dancefloor").height();
-  // window.danceFloorWidth = $(".dancefloor").width();
+  window.danceFloorHeight = $(".dancefloor").height();
+  window.danceFloorWidth = $(".dancefloor").width();
 
   $(".DancerButton").on("click", function(event){
-    /* This function sets up the click handlers for the create-dancer
-     * buttons on index.html. You should only need to make one small change to it.
-     * As long as the "data-dancer-maker-function-name" attribute of a
-     * class="addDancerButton" DOM node matches one of the names of the
-     * maker functions available in the global scope, clicking that node
-     * will call the function to make the dancer.
-     */
-
-    /* dancerMakerFunctionName is a string which must match
-     * one of the dancer maker functions available in global scope.
-     * A new object of the given type will be created and added
-     * to the stage.
-     */
     var dancerFunctionName = $(this).data("dancer-function-name");
 
     // get the maker function for the kind of dancer we're supposed to make
@@ -27,8 +14,8 @@ $(document).ready(function(){
 
 
     var dancer = new dancerFunction(
-      ($(".dancefloor").height()) * Math.random() + 40, //top bar ~40px
-      ($(".dancefloor").width()) * Math.random(),
+      window.danceFloorHeight * Math.random() + 40, //top bar ~40px
+      window.danceFloorWidth * Math.random(),
       Math.random() * 1000,
       window.dancers.length
     );

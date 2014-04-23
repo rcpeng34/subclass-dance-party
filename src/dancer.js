@@ -22,15 +22,16 @@ Dancer.prototype.step = function() {
 Dancer.prototype.randomMovement = function ()  {
   var dY = Math.random()*40-20;
   var dX = Math.random()*40-20;
-  while(this._position[0] + dY > $(".dancefloor").height() - 100 ||
-        this._position[0] + dY < 0 ||
-        this._position[1] + dX > $(".dancefloor").width() - 50 ||
-        this._position[1] + dX < 0) {
-    dY = Math.random()*40-20;
-    dX = Math.random()*40-20;
-  }
-  this._position[0] += dY;
-  this._position[1] += dX;
+  // while(this._position[0] + dY > window.danceFloorHeight - 100 ||
+  //       this._position[0] + dY < 0 ||
+  //       this._position[1] + dX > window.danceFloorWidth - 50 ||
+  //       this._position[1] + dX < 0) {
+  //   dY = Math.random()*40-20;
+  //   dX = Math.random()*40-20;
+  // }
+  dY = Math.min(50, dY);
+  this._position[0] = Math.min((Math.max(50, this._position[0]+ dY)), window.danceFloorHeight - 100);
+  this._position[1] = Math.min((Math.max(0, this._position[1] + dX)), window.danceFloorWidth - 50);
   this.setPosition(this._position);
 };
 
