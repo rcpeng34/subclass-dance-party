@@ -71,6 +71,9 @@ DiggerDancer.prototype.findBaller = function () {
     return Math.sqrt(y * y + x * x);
   };
 
+  // this loop basically goes through the dancers array looking for ballers,
+  // when it finds one, it sets it as the closest if it is closest
+  // returns the baller object and distance.
   for(var i = 0; i < window.dancers.length; i++) {
     if(window.dancers[i]) {
       if(window.dancers[i].constructor === BallerDancer) {
@@ -90,7 +93,3 @@ DiggerDancer.prototype.findBaller = function () {
   }
   return ([closestBaller, closestBallerDistance]);
 };
-
-
-
-
