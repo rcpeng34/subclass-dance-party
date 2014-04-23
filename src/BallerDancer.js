@@ -5,13 +5,17 @@ var BallerDancer = function(top, left, timeBetweenSteps, dancerIndex) {
   // ballers start with at least $400
   this.money = Math.max((Math.floor(Math.random()*1000)), 400);
   this.$node.attr({
-    src: 'http://cdn.freebievectors.com/illustrations/10/b/business-man-clip-art/preview.jpg',
+    // src: 'http://cdn.freebievectors.com/illustrations/10/b/business-man-clip-art/preview.jpg',
     width: '50px',
-    height: '100px'
+    height: '50px'
+  });
+    this.$node.css({
+    'background-color': 'green',
+    'border-radius': '1000px'
   });
 };
 
-// "inheriting Dancer"
+// "inheriting" Dancer
 BallerDancer.prototype = Object.create(Dancer.prototype);
 BallerDancer.prototype.constructor = BallerDancer;
 
@@ -23,8 +27,6 @@ BallerDancer.prototype.step = function () {
 
   // if baller falls betwen $10, he leaves the club
   if (this.money < 10 && this.isAtTheClub) {
-    $('.announcement').html('<h1>' + this.name + ' has left the club!</h1>');
-    $('.announcement').fadeIn().delay(1500).fadeOut();
     this.leaveTheClub();
   }
 };

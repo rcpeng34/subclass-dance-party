@@ -22,6 +22,11 @@ div {
   z-index:1000;
 }
 
+.center{
+  text-align:center;
+  color:white;
+}
+
 .clubRevenue{
   padding:5px 12px;
 }
@@ -66,6 +71,7 @@ div {
 }
 
 .sidebar{
+  color:white;
   overflow: auto;
   width:20%;
   float:left;

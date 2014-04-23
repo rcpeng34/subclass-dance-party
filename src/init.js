@@ -20,15 +20,16 @@ $(document).ready(function(){
     var dancer = new dancerFunction(
       window.danceFloorHeight * Math.random() + 40, //top bar ~40px
       window.danceFloorWidth * Math.random(),
-      (Math.random() * 300) + 300,
+      (Math.random() * 300) + 300, // at least 300 ms + 0-300 ms
       window.dancers.length
     );
 
     // append new dancer to dom
     $('.dancefloor').append(dancer.$node);
-
     // push dancer to array of dancers
     window.dancers.push(dancer);
+    // append new dancer to sidelist
+    addSideBarEntry(window.dancers[window.dancers.length -1]);
 
   });
 });

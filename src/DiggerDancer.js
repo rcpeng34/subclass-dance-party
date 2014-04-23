@@ -4,9 +4,13 @@ var DiggerDancer = function(top, left, timeBetweenSteps, dancerIndex) {
   Dancer.apply(this, Array.prototype.slice.call(arguments));
 
   this.$node.attr({
-    src: 'http://cdn.freebievectors.com/illustrations/10/m/miner-mine-job-profession/preview.jpg',
-    width: '50px',
-    height: '50px'
+    // src: 'http://cdn.freebievectors.com/illustrations/10/m/miner-mine-job-profession/preview.jpg',
+    width: '25px',
+    height: '25px'
+  });
+  this.$node.css({
+    'background-color': 'yellow',
+    'border-radius': '100px'
   });
 };
 
@@ -33,8 +37,8 @@ DiggerDancer.prototype.step = function () {
     this.chaseBaller(window.chaseSpeed, foundBaller, foundDist);
   }
 
-  // leave if money falls below $10
-  if (this.money < 10 && this.isAtTheClub) {
+  // leave if money exceeds 500
+  if (this.money > 500 && this.isAtTheClub) {
     this.leaveTheClub();
   }
 };
@@ -49,10 +53,13 @@ DiggerDancer.prototype.chaseBaller = function(cs, fb, fd) {
 };
 
 // if digger gets within 10 px of a baller, digger takes $10 from baller
+// only happens if baller has enough money (> $10)
 DiggerDancer.prototype.dig = function(baller, distance) {
-  if(distance <= 10) {
+  if(distance <= 10 && baller.money > 10) {
     baller.money -= 10;
     this.money += 10;
+    updateSideBarEntry(baller);
+    updateSideBarEntry(this);
   }
 };
 
@@ -76,7 +83,7 @@ DiggerDancer.prototype.findBaller = function () {
   // returns the baller object and distance.
   for(var i = 0; i < window.dancers.length; i++) {
     if(window.dancers[i]) {
-      if(window.dancers[i].constructor === BallerDancer) {
+      if(getTypeOfDancer(window.dancers[i]) === "Baller") {
         if (!closestBaller) {
           closestBaller = window.dancers[i];
           closestBallerDistance = findDistance(closestBaller._position, this._position);

@@ -24,7 +24,11 @@ var Dancer = function(top, left, timeBetweenSteps, dancerIndex) {
 Dancer.prototype.leaveTheClub = function() {
   this.$node.remove();
   this.isAtTheClub = false;
+  // sets the dancer as null so other dancer's _id don't have to be updated
   window.dancers[this._id] = null;
+  announceDancerHasLeft(this);
+  // removes the dancer from the sidebar
+  removeSideBarEntry(this);
 };
 
 // call dancer.randomMovement to make dancer move randomly
