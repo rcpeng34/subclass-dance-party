@@ -16,7 +16,6 @@ var addSideBarEntry = function(dancer){
 
 // given a dancer, updates the sidebar entry for it with money amount
 var updateSideBarEntry = function(dancer){
-  // TO-DO figure out why jquery selection requires this format here
   $('li#'+dancer._id+'.sidebar-entry').html(
     getTypeOfDancer(dancer) + ': ' + dancer.name + ' | $' + dancer.money
   );

@@ -38,7 +38,6 @@ Dancer.prototype.randomMovement = function ()  {
   var dY = (Math.random()*(2*ms)) - ms;
   var dX = (Math.random()*(2*ms)) - ms;
 
-// TO-DO clean this up
   this._position[0] = Math.min((Math.max(50, this._position[0]+ dY)), window.danceFloorHeight - 100);
   this._position[1] = Math.min((Math.max(0, this._position[1] + dX)), window.danceFloorWidth - 50);
   this.setPosition(this._position);
